@@ -22,7 +22,7 @@
     "avis": [
         {
             "id": 0,
-            "auteur": {
+            "buyer": {
                 "id": 0,
                 "nom": "abc123",
                 "prenom": "abc123",
