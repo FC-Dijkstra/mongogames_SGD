@@ -1,5 +1,7 @@
 # TODO
 
+**Voir pour faire des dingueries avec curses**
+
 * générateur de données (python ?)
 * CLI python
 
@@ -20,7 +22,6 @@
 * ajouter un produit à une wishlist
 * mettre a jour la note d'un produit à l'ajout d'un commentaire
 * purger toutes les promotions a expiration
-
 
 ## Fonctionnalités avancées
 
