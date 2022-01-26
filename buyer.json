@@ -1,0 +1,16 @@
+{
+    "buyer": {
+        "_id": 1,
+        "name": "abc123",
+        "fstName": "abc123",
+        "nickname": "abc123",
+        "password": "abc123",
+        "wishlist": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    }
+}
