@@ -4,6 +4,26 @@ from sshtunnel import BaseSSHTunnelForwarderError
 from sshtunnel import SSHTunnelForwarder
 import pymongo
 import pprint
+import cmd
+
+# * Classe pour la CLI
+
+class CLI(cmd.Cmd):
+    intro = "CLI pour gérer mongogames (help pour de l'aide"
+    prompt = "~> "
+
+    def do_quit(self, line):
+        """Quitter la CLI"""
+        print("--- Closing conneion ---")
+        client.close()
+        sshServer.stop()
+        exit(0)
+
+    def do_test(self, text):
+        """Tester l'accès à la base mongoDB"""
+        db = client[config["mongo_db"]]
+        pprint.pprint(db.list_collection_names())
+
 
 # ? nettoyage de l'interface
 os.system("clear")
@@ -36,12 +56,5 @@ mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config[
 client = pymongo.MongoClient(mongostring, sshServer.local_bind_port)
 print("--- Connection OK ---")
 
-# ! insérer code sur les tables ici.
-db = client[config["mongo_db"]]
-pprint.pprint(db.list_collection_names())
-pprint.pprint(next(db['etudiants'].find()))
-
-# ? fermeture de la connexion
-print("--- Closing connexion ---")
-sshServer.stop()
-exit(0)
+cli = CLI()
+cli.cmdloop()
