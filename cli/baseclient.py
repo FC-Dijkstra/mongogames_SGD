@@ -5,16 +5,22 @@ from sshtunnel import SSHTunnelForwarder
 import pymongo
 import pprint
 import cmd
+import datagenerator
+
+# * variables globales
+client: pymongo.MongoClient
+db: pymongo.database.Database
+
 
 # * Classe pour la CLI
 
 class CLI(cmd.Cmd):
-    intro = "CLI pour gérer mongogames (help pour de l'aide"
+    intro = "CLI pour gérer mongogames (help pour de l'aide)"
     prompt = "~> "
 
     def do_quit(self, line):
         """Quitter la CLI"""
-        print("--- Closing conneion ---")
+        print("--- Closing connexion ---")
         client.close()
         sshServer.stop()
         exit(0)
@@ -23,6 +29,28 @@ class CLI(cmd.Cmd):
         """Tester l'accès à la base mongoDB"""
         db = client[config["mongo_db"]]
         pprint.pprint(db.list_collection_names())
+
+    def do_generate(self, text):
+        """Générer des données aléatoires. generate <product|buyer|comment|promotion|purchase|data> <quantity>"""
+        if text:
+            text = text.split()
+            db = client[config["mongo_db"]]
+            if text[0] == "product":
+                datagenerator.generateProduct(db, text[1])
+            elif text[0] == "buyer":
+                datagenerator.generateBuyer(db, text[1])
+            elif text[0] == "comment":
+                datagenerator.generateComment(db, text[1])
+            elif text[0] == "promotion":
+                datagenerator.generatePromotion(db, text[1])
+            elif text[0] == "purchase":
+                datagenerator.generatePurchase(db, text[1])
+            elif text[0] == "data":
+                datagenerator.generateData(db, text[1])
+            else:
+                print("Argument invalide")
+        else:
+            print("Vous devez préciser deux arguments")
 
 
 # ? nettoyage de l'interface

@@ -34,4 +34,26 @@ def generateProduct(db: database.Database, quantity):
         pprint.pprint(product)
 
 
-generateProduct(None, 1)
+def generateBuyer(db: database.Database, quantity):
+    quantity = int(quantity)
+    for i in range(0, quantity):
+        print(i)
+
+
+def generateComment(db: database.Database, quantity):
+    for i in range(0, quantity):
+        print(i)
+
+
+def generatePromotion(db: database.Database, quantity):
+    for i in range(0, quantity):
+        print(i)
+
+
+def generatePurchase(db: database.Database, quantity):
+    for i in range(0, quantity):
+        print(i)
+
+
+def generateData(db: database.Database):
+    print("générer la totale")
