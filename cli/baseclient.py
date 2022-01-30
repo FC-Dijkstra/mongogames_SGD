@@ -5,7 +5,12 @@ from sshtunnel import SSHTunnelForwarder
 import pymongo
 import pprint
 import cmd
+import subprocess
+import psutil
+
+
 import datagenerator
+import products
 
 # * variables globales
 client: pymongo.MongoClient
@@ -15,7 +20,7 @@ db: pymongo.database.Database
 # * Classe pour la CLI
 
 class CLI(cmd.Cmd):
-    intro = "CLI pour gérer mongogames (help pour de l'aide)"
+    intro = "MongoGames Shell  || (help pour plus d'informations)"
     prompt = "~> "
 
     def do_quit(self, line):
@@ -25,13 +30,9 @@ class CLI(cmd.Cmd):
         sshServer.stop()
         exit(0)
 
-    def do_test(self, text):
-        """Tester l'accès à la base mongoDB"""
-        db = client[config["mongo_db"]]
-        pprint.pprint(db.list_collection_names())
-
     def do_generate(self, text):
-        """Générer des données aléatoires. generate <product|buyer|comment|promotion|purchase|data> <quantity>"""
+        """generate <product|buyer|comment|promotion|purchase|data> <quantity>"""
+        """Génère des données aléatoires"""
         if text:
             text = text.split()
             db = client[config["mongo_db"]]
@@ -52,9 +53,17 @@ class CLI(cmd.Cmd):
         else:
             print("Vous devez préciser deux arguments")
 
+    def do_create(self, arg):
+        products.createProduct(db)
+        clearScreen()
+
 
 # ? nettoyage de l'interface
-os.system("clear")
+def clearScreen():
+    os.system("clear")
+
+
+clearScreen()
 
 # ? Chargement fichier de configuration
 configfile = open("./config.json")
@@ -82,6 +91,7 @@ except BaseSSHTunnelForwarderError:
 mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
 
 client = pymongo.MongoClient(mongostring, sshServer.local_bind_port)
+db = client[config["mongo_db"]]
 print("--- Connection OK ---")
 
 cli = CLI()
