@@ -54,8 +54,21 @@ class CLI(cmd.Cmd):
             print("Vous devez préciser deux arguments")
 
     def do_create(self, arg):
-        products.createProduct(db)
-        clearScreen()
+        """create <product|comment|buyer|promotion|purchase>"""
+        """Crée un objet du type spécifié et l'insère dans la table"""
+        if arg:
+            if arg == "product":
+                products.createProduct(db)
+            elif arg == "comment":
+                print("create comment")
+            elif arg == "buyer":
+                print("buyer")
+            elif arg == "promotion":
+                print("create promotion")
+            elif arg == "purchase":
+                print("purchase")
+        else:
+            print("Vous devez préciser le type d'objet a créer")
 
 
 # ? nettoyage de l'interface

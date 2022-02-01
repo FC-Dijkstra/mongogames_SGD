@@ -33,17 +33,23 @@ def createProduct(db: database.Database):
     print("===================")
     print("Acknowledged: " + str(result.acknowledged))
     print("_id: " + str(result.inserted_id))
-    input("Appuyez sur une touche pour continuer")
 
     # pprint.pprint(product)
 
 
-def getProduct():
-    print("GET")
+def getProductByName(db: database.Database, name):
+    product = db.products.find_one({"name": name})
+    print("===================")
+    pprint.pprint(product)
 
 
-def getAllProducts():
-    print("GET ALL")
+def getAllProducts(db: database.Database):
+    products = db.products.find()
+    print("===================")
+    pprint.pprint(products)
+
+def linkCommentToProduct(db: database.Database, productID, commentID):
+    db.products.update_one({"_id": productID}, {"$push": {"comments": commentID}})
 
 
 def updateProduct():
