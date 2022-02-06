@@ -1,2 +1,5 @@
 db/journal/
 config.json
+config_VPN.json
+
+config_LOCAL.json

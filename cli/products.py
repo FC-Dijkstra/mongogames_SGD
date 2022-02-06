@@ -48,6 +48,12 @@ def getAllProducts(db: database.Database):
     print("===================")
     pprint.pprint(products)
 
+def listProductsUID(db: database.Database):
+    productsUIDs = db.products.find({},{"_id": 1})
+    print("===================")
+    pprint.pprint(productsUIDs)
+
+
 def linkCommentToProduct(db: database.Database, productID, commentID):
     db.products.update_one({"_id": productID}, {"$push": {"comments": commentID}})
 

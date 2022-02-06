@@ -12,6 +12,8 @@ import psutil
 import datagenerator
 import products
 
+LOCAL = True
+
 # * variables globales
 client: pymongo.MongoClient
 db: pymongo.database.Database
@@ -70,6 +72,11 @@ class CLI(cmd.Cmd):
         else:
             print("Vous devez préciser le type d'objet a créer")
 
+    def do_list(self, arg):
+        if arg:
+            if arg == "product":
+                products.listProductsUID(db)
+
 
 # ? nettoyage de l'interface
 def clearScreen():
@@ -86,22 +93,30 @@ configfile.close()
 print("--- Loaded config ---")
 
 # ? configuration et connexion ssh
-sshServer = SSHTunnelForwarder(
-    config["mongo_host"],
-    ssh_username=config["ssh_username"],
-    ssh_password=config["ssh_password"],
-    remote_bind_address=(config["remote_host"], config["remote_port"])
-)
+if (LOCAL == False):
+    sshServer = SSHTunnelForwarder(
+        config["mongo_host"],
+        ssh_username=config["ssh_username"],
+        ssh_password=config["ssh_password"],
+        remote_bind_address=(config["remote_host"], config["remote_port"])
+    )
 
-try:
-    sshServer.start()
-except BaseSSHTunnelForwarderError:
-    print("Erreur de connexion SSH. Le VPN est-il actif ?")
-    exit(1)
+    try:
+        sshServer.start()
+    except BaseSSHTunnelForwarderError:
+        print("Erreur de connexion SSH. Le VPN est-il actif ?")
+        exit(1)
+
+
 
 # ? configuration et connexion mongoDB
 # mongodb://user:pwd@host/db?authSource=db
-mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
+if (LOCAL == False):
+    mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
+elif (LOCAL == True):
+    mongostring = f"mongodb://ian:aaa@localhost/admin"
+
+
 
 client = pymongo.MongoClient(mongostring, sshServer.local_bind_port)
 db = client[config["mongo_db"]]
