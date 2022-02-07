@@ -86,7 +86,10 @@ def clearScreen():
 clearScreen()
 
 # ? Chargement fichier de configuration
-configfile = open("./config.json")
+if (LOCAL == True):
+    configfile = open("./config_LOCAL.json")
+elif (LOCAL == False):
+    configfile = open("./config_FAC.json")
 config = json.load(configfile)
 configfile.close()
 # pprint.pprint(config)
@@ -117,10 +120,16 @@ elif (LOCAL == True):
     mongostring = f"mongodb://ian:aaa@localhost/admin"
 
 
-
-client = pymongo.MongoClient(mongostring, sshServer.local_bind_port)
-db = client[config["mongo_db"]]
-print("--- Connection OK ---")
-
-cli = CLI()
-cli.cmdloop()
+try:
+    if (LOCAL == True):
+        client = pymongo.MongoClient(mongostring, serverSelectionTimeoutMS=1000)
+    elif (LOCAL == False):
+        client = pymongo.MongoClient(mongostring, sshServer.local_bind_port, serverSelectionTimeoutMS=1000)
+    client.server_info()
+    db = client[config["mongo_db"]]
+    print("--- Connection OK ---")
+    cli = CLI()
+    cli.cmdloop()
+except:
+    print("Invalid connexion, aborting.")
+    exit(1)
