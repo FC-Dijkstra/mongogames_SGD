@@ -3,10 +3,7 @@ import json
 from sshtunnel import BaseSSHTunnelForwarderError
 from sshtunnel import SSHTunnelForwarder
 import pymongo
-import pprint
 import cmd
-import subprocess
-import psutil
 
 
 import datagenerator
