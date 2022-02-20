@@ -28,6 +28,7 @@ class CLIManager:
         return self.stack[index]
 
     def loop(self):
+        # tant que ESC pas pressé
         while(True):
             self.update()
             self.top().handleInput()
@@ -39,6 +40,8 @@ class CLIManager:
             element.clear()
             element.draw()
             element.update()
+
+        # Mettre le curseur en position 0, 0 ?
 
     def exit(self):
         curses.nocbreak()
