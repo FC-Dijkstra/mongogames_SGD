@@ -83,45 +83,20 @@ def clearScreen():
 clearScreen()
 
 # ? Chargement fichier de configuration
-if (LOCAL == True):
-    configfile = open("./config_LOCAL.json")
-elif (LOCAL == False):
-    configfile = open("./config_FAC.json")
+configfile = open("../config.json")
 config = json.load(configfile)
 configfile.close()
 # pprint.pprint(config)
 print("--- Loaded config ---")
 
-# ? configuration et connexion ssh
-if (LOCAL == False):
-    sshServer = SSHTunnelForwarder(
-        config["mongo_host"],
-        ssh_username=config["ssh_username"],
-        ssh_password=config["ssh_password"],
-        remote_bind_address=(config["remote_host"], config["remote_port"])
-    )
-
-    try:
-        sshServer.start()
-    except BaseSSHTunnelForwarderError:
-        print("Erreur de connexion SSH. Le VPN est-il actif ?")
-        exit(1)
-
-
-
 # ? configuration et connexion mongoDB
 # mongodb://user:pwd@host/db?authSource=db
-if (LOCAL == False):
-    mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
-elif (LOCAL == True):
-    mongostring = f"mongodb://ian:aaa@localhost/admin"
+mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
+
 
 
 try:
-    if (LOCAL == True):
-        client = pymongo.MongoClient(mongostring, serverSelectionTimeoutMS=1000)
-    elif (LOCAL == False):
-        client = pymongo.MongoClient(mongostring, sshServer.local_bind_port, serverSelectionTimeoutMS=1000)
+    client = pymongo.MongoClient(mongostring, serverSelectionTimeoutMS=1000)
     client.server_info()
     db = client[config["mongo_db"]]
     print("--- Connection OK ---")
