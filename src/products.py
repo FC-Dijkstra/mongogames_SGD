@@ -24,9 +24,9 @@ def createProduct(db: database.Database):
         "duration": input("Durée (int): "),
         "recommendedAge": input("Age recommandé (int): "),
         "expeditionTime": input("Délai d'envoi (int): "),
-        "complexity": input("Complexité (float) (0 <= x <= 10): "),
-        "concentration": input("Concentration (float) (0 <= x <= 10): "),
-        "ambience": input("Ambience (float) (0 <= x <= 5)")
+        "complexity": input("Complexité (float) [0;10]: "),
+        "concentration": input("Concentration (float) [0; 10]: "),
+        "ambience": input("Ambience (float) [0; 10]: ")
     }
 
     result = db.products.insert_one(product)

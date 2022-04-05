@@ -1,32 +1,31 @@
 import os
 import json
-from sshtunnel import BaseSSHTunnelForwarderError
-from sshtunnel import SSHTunnelForwarder
+import pprint
 import pymongo
 import cmd
 
+from pymongo import database
 
 import datagenerator
 import products
 
-LOCAL = True
-
 # * variables globales
 client: pymongo.MongoClient
-db: pymongo.database.Database
+db: database.Database
+currentUID: str = ""
+currentType: str = ""
 
 
 # * Classe pour la CLI
 
 class CLI(cmd.Cmd):
     intro = "MongoGames Shell  || (help pour plus d'informations)"
-    prompt = "~> "
+    prompt = f"[{currentUID}][{currentType}] > "
 
     def do_quit(self, line):
         """Quitter la CLI"""
         print("--- Closing connexion ---")
         client.close()
-        sshServer.stop()
         exit(0)
 
     def do_generate(self, text):
@@ -75,33 +74,22 @@ class CLI(cmd.Cmd):
                 products.listProductsUID(db)
 
 
-# ? nettoyage de l'interface
-def clearScreen():
-    os.system("clear")
-
-
-clearScreen()
-
 # ? Chargement fichier de configuration
 configfile = open("../config.json")
 config = json.load(configfile)
 configfile.close()
-# pprint.pprint(config)
+pprint.pprint(config)
 print("--- Loaded config ---")
 
 # ? configuration et connexion mongoDB
 # mongodb://user:pwd@host/db?authSource=db
-mongostring = f"mongodb://{config['mongo_user']}:{config['mongo_pass']}@{config['remote_host']}/{config['mongo_db']}?authSource={config['mongo_db']}"
+mongostring = f"mongodb+srv://{config['user']}:{config['password']}@{config['host']}/myFirstDatabase?retryWrites=true&w=majority"
+print(mongostring)
 
 
+client = pymongo.MongoClient(mongostring)
+db = client.test
+print("--- Connection OK ---")
+cli = CLI()
+cli.cmdloop()
 
-try:
-    client = pymongo.MongoClient(mongostring, serverSelectionTimeoutMS=1000)
-    client.server_info()
-    db = client[config["mongo_db"]]
-    print("--- Connection OK ---")
-    cli = CLI()
-    cli.cmdloop()
-except:
-    print("Invalid connexion, aborting.")
-    exit(1)
