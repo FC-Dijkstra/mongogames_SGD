@@ -41,17 +41,20 @@ def getProductByName(db: database.Database, name):
     product = db.products.find_one({"name": name})
     print("===================")
     pprint.pprint(product)
+    return product
 
 
 def getAllProducts(db: database.Database):
     products = db.products.find()
     print("===================")
     pprint.pprint(products)
+    return products
 
 def listProductsUID(db: database.Database):
     productsUIDs = db.products.find({},{"_id": 1})
     print("===================")
     pprint.pprint(productsUIDs)
+    return productsUIDs
 
 
 def linkCommentToProduct(db: database.Database, productID, commentID):
@@ -62,7 +65,8 @@ def updateProduct():
     print("UPDATE")
 
 
-def deleteProduct():
+def deleteProduct(db: database.Database, productID):
+    db.products.delete_one({"_id": productID})
     print("DELETE")
 
 

@@ -1,5 +1,6 @@
 import os
 import json
+from pathlib import PurePosixPath
 import pprint
 import pymongo
 import cmd
@@ -8,6 +9,10 @@ from pymongo import database
 
 import datagenerator
 import products
+import comments
+import purchases
+import promotions
+import buyers
 
 # * variables globales
 client: pymongo.MongoClient
@@ -58,12 +63,16 @@ class CLI(cmd.Cmd):
             if arg == "product":
                 products.createProduct(db)
             elif arg == "comment":
+                comments.createComment(db)
                 print("create comment")
             elif arg == "buyer":
+                buyers.createBuyer(db)
                 print("buyer")
             elif arg == "promotion":
+                promotions.createPromotion(db)
                 print("create promotion")
             elif arg == "purchase":
+                purchases.createPurchase(db)
                 print("purchase")
         else:
             print("Vous devez préciser le type d'objet a créer")
@@ -88,7 +97,7 @@ print(mongostring)
 
 
 client = pymongo.MongoClient(mongostring)
-db = client.test
+db = client.SGD
 print("--- Connection OK ---")
 cli = CLI()
 cli.cmdloop()

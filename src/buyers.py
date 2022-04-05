@@ -20,3 +20,7 @@ def createBuyer(db: database.Database):
     print("=====================")
     print("Acknowledged: " + str(result.acknowledged))
     print("_id: " + str(result.inserted_id))
+
+
+def deleteBuyer(db: database.Database, BuyerID):
+    db.buyer.delete_one({"_id": BuyerID})
