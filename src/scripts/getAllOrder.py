@@ -19,7 +19,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("--- find all buyers ---")
+print("--- find all orders ---")
 orders = db.orders.find()
 for order in orders:
         pprint(order)

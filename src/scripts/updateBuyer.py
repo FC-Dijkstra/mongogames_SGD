@@ -19,7 +19,7 @@ db = client.SGD
 print("--- Connection OK ---")
 print("---update buyer---")
 
-buyerID = input("ID Produit: ")
+buyerID = input("ID Buyer: ")
 updated_buyer = db.buyers.find_one({"_id": ObjectId(buyerID)})
 buyer = {
         "name": input("name (string): ") or updated_buyer["name"],
