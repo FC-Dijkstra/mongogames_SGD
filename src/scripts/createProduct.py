@@ -17,7 +17,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-
+print("--- Créer un produit ---")
 product = {
     "name": input("Nom (string):"),
     "description": input("Description (string): "),

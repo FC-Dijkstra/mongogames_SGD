@@ -13,11 +13,15 @@ Imbrication:
 ## Fonctionnalités
 
 * CRUD produit
-  * 
+  * FAIT Yann
 * CRUD promotion
+  * TODO Yann
 * CRUD purchase
+  * TODO
 * CRUD buyer
+  * FAIT Matthieu
 * CRUD comment
+  * TODO Yann
 * commentaires pour un produit
 * acheter un produit
 * ajouter un commentaire à un produit
