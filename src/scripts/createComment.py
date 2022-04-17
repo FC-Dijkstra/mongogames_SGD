@@ -1,4 +1,5 @@
 import json
+import pprint
 from datetime import datetime
 
 import pymongo
@@ -16,12 +17,38 @@ client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
 print("--- Ajouter un commentaire ---")
-buyerID = input("ID de l'acheteur")
-productID = input("ID du produit")
+buyerID = input("ID de l'acheteur: ")
+productID = input("ID du produit: ")
 
-# TODO: check si a acheté produit
-hasBought = db.orders.find({"buyerID": ObjectId(buyerID), "order."})
-# TODO: check si pas de commentaire existant (limite 1)
+# 625c18d40ad854de821d0401
+# 625c23fc781677e6f2531ce5
+
+# Check si l'utilisateur a acheté le produit
+hasBought = db.orders.find_one(
+    {"buyerID": ObjectId(buyerID)},
+    {"order": {
+        "$elemMatch": {
+            "idProduct": ObjectId(productID)
+        }
+    }}
+)
+if hasBought is None:
+    print("Erreur, l'utilisateur n'a pas acheté le produit")
+    exit(1)
+
+# Check si l'utilisateur a déjà commenté le produit
+hasCommented = db.products.find_one(
+    {"_id": ObjectId(productID)},
+    {"comments": {
+        "$elemMatch": {
+            "buyerID": ObjectId(buyerID)
+        }
+    }}
+)
+
+if hasCommented is not None:
+    print("Erreur, l'utilisateur a déjà commenté sur le produit")
+    exit(1)
 
 comment = {
     "buyerID": ObjectId(buyerID),
