@@ -12,12 +12,11 @@ Imbrication:
 
 ## Fonctionnalités
 
-* CRUD produit
-  * 
-* CRUD promotion
-* CRUD purchase
-* CRUD buyer
-* CRUD comment
+* CRUD produit          #create fait
+* CRUD promotion        #create fait
+* CRUD purchase         #create fait
+* CRUD buyer            #create fait
+* CRUD comment          #create fait
 * commentaires pour un produit
 * acheter un produit
 * ajouter un commentaire à un produit
