@@ -1,5 +1,10 @@
 # TODO
 
+Imbrication:
+- Products contient promotions et comments
+- Buyer est indépendant
+- Order contient Product et Buyer
+
 **Voir pour faire des dingueries avec curses**
 
 * générateur de données (python ?)
@@ -8,6 +13,7 @@
 ## Fonctionnalités
 
 * CRUD produit
+  * 
 * CRUD promotion
 * CRUD purchase
 * CRUD buyer

@@ -57,21 +57,24 @@ class CLI(cmd.Cmd):
             print("Vous devez préciser deux arguments")
 
     def do_create(self, arg):
-        """create <product|comment|buyer|promotion|purchase>"""
+        """create <product|comment|buyer|promotion|purchase> <current>"""
         """Crée un objet du type spécifié et l'insère dans la table"""
         if arg:
-            if arg == "product":
-                products.createProduct(db)
-            elif arg == "comment":
+            if arg[0] == "product":
+                res = products.createProduct(db)
+                if arg[1] == "current":
+                    currentUID = res.inserted_id
+                    currentType = "product"
+            elif arg[0] == "comment":
                 comments.createComment(db)
                 print("create comment")
-            elif arg == "buyer":
+            elif arg[0] == "buyer":
                 buyers.createBuyer(db)
                 print("buyer")
-            elif arg == "promotion":
+            elif arg[0] == "promotion":
                 promotions.createPromotion(db)
                 print("create promotion")
-            elif arg == "purchase":
+            elif arg[0] == "purchase":
                 purchases.createPurchase(db)
                 print("purchase")
         else:
@@ -87,14 +90,12 @@ class CLI(cmd.Cmd):
 configfile = open("../config.json")
 config = json.load(configfile)
 configfile.close()
-pprint.pprint(config)
 print("--- Loaded config ---")
 
 # ? configuration et connexion mongoDB
 # mongodb://user:pwd@host/db?authSource=db
 mongostring = f"mongodb+srv://{config['user']}:{config['password']}@{config['host']}/myFirstDatabase?retryWrites=true&w=majority"
 print(mongostring)
-
 
 client = pymongo.MongoClient(mongostring)
 db = client.SGD

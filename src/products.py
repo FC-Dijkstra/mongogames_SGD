@@ -8,33 +8,7 @@ from pymongo import database
 
 
 def createProduct(db: database.Database):
-    product = {
-        "name": input("Nom (string):"),
-        "description": input("Description (string): "),
-        "price": input("Prix (float): "),
-        "sales": 0,
-        "notation": 0,
-        "stock": input("Stock (int): "),
-        "comments": [],
-        "release": datetime.datetime.now().isoformat(),
-        "author": input("Auteur (string): "),
-        "editor": input("Editeur (string): "),
-        "minPlayers": input("Nombre minimum de joueurs (int): "),
-        "maxPlayers": input("Nombre maximum de joueurs (int): "),
-        "duration": input("Durée (int): "),
-        "recommendedAge": input("Age recommandé (int): "),
-        "expeditionTime": input("Délai d'envoi (int): "),
-        "complexity": input("Complexité (float) [0;10]: "),
-        "concentration": input("Concentration (float) [0; 10]: "),
-        "ambience": input("Ambience (float) [0; 10]: ")
-    }
-
-    result = db.products.insert_one(product)
-    print("===================")
-    print("Acknowledged: " + str(result.acknowledged))
-    print("_id: " + str(result.inserted_id))
-
-    # pprint.pprint(product)
+    return ""
 
 
 def getProductByName(db: database.Database, name):
@@ -51,9 +25,10 @@ def getAllProducts(db: database.Database):
     return products
 
 def listProductsUID(db: database.Database):
-    productsUIDs = db.products.find({},{"_id": 1})
+    productsUIDs = list(db.products.find({},{"_id": 1}))
     print("===================")
-    pprint.pprint(productsUIDs)
+    for (element) in productsUIDs:
+        print(element)
     return productsUIDs
 
 
