@@ -12,18 +12,34 @@ Imbrication:
 
 ## Fonctionnalités
 
+
 * CRUD produit
-  * FAIT Yann
+  > * FAIT Yann
 * CRUD promotion
+<<<<<<< HEAD
   * FAIT Yann
 * CRUD purchase
   * FAIT matthieu
+=======
+  > * TODO Yann
+* CRUD purchase
+  > * FAIT Matthieu
+>>>>>>> main
 * CRUD buyer
-  * FAIT Matthieu
+  > * FAIT Matthieu
 * CRUD comment
+<<<<<<< HEAD
   * FAIT Yann
 * acheter un produit -> C purchase
 * ajouter un commentaire à un produit -> C comment
+=======
+  > * TODO Yann
+
+
+* commentaires pour un produit
+* acheter un produit
+* ajouter un commentaire à un produit
+>>>>>>> main
 * récupérer tous les produits en promotion
   * FAIT Yann
 * récupérer tous les commentaires d'un produit
