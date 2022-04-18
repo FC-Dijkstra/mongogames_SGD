@@ -54,7 +54,7 @@ while iteration != "end" :
 order = {
         "order": item_ordered,
         "buyerID": ObjectId(input("ID (string): ")),
-        "date": date.today().strftime("%d/%m/%Y"),
+        "date": datetime.now(),
         "totalAmount": totalamount,
     }
 

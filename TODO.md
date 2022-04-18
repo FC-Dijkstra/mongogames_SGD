@@ -57,5 +57,11 @@ Imbrication:
 
 * évolution des ventes (+ CA) au cours du temps pour un produit
 * impact des promotions sur les ventes
+<<<<<<< Updated upstream
+=======
+* statistiques globales journalière ou depuis une date d'un produit
+  > * FAIT Matthieu
+* statistiques globales journalières (n - 1) (échelle site) 
+>>>>>>> Stashed changes
 * statistiques globales journalières (n - 1) (échelle éditeur / auteur)
 * évolution de l'avis des utilisateurs sur un produit
