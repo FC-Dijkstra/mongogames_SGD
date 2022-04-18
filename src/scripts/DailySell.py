@@ -5,6 +5,7 @@ from pprint import pprint
 import pymongo
 from bson import ObjectId
 
+
 configfile = open("../../config.json")
 config = json.load(configfile)
 configfile.close()
@@ -28,13 +29,15 @@ choice = "$"+choice
 print("date : ", choice, " : ", date)
 
 try:
-    result = db.orders.aggregate([{"$match": {"date" : {choice: date}}},{"$unwind" : "$order"},{"$group": {"_id" : {"idProduct": "$order.idProduct"},
+    result = db.orders.aggregate([{"$match": {"date" : {choice: date}}},{"$unwind" : "$order"},{"$group": {"_id" :"$order.idProduct",
                                                                             "total": {"$sum": "$order.quantity"}}},
                               {"$project": {"_id": 1, "total" : 1, "date": 1}}, {"$sort" : {"date" : -1}}])
 except Exception as e :
     print("Error !! : ", e)
 
 for r in result:
+    product = db.products.find_one({"_id": r["_id"]})
+    print("product name : ",product["name"],"\nauthor : ", product["author"],"\ntotal price : ", float(product["price"])*int(r["total"]),"\n")
     pprint(r)
 print("--- Closing connexion ---")
 client.close()
