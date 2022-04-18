@@ -1,4 +1,5 @@
 import datetime
+from datetime import datetime
 import json
 import uuid
 
@@ -23,8 +24,8 @@ promotion = {
     "uuid": ObjectId(),
     "type": input("Type: (FLAT | PERCENT): "),
     "value": input("Valeur: "),
-    "startDate": input("Date de début: "),
-    "endDate": input("Date de fin: ")
+    "startDate": datetime.strptime(input("Date de début (dd/mm/YYYY): "), "%d/%m/%Y"),
+    "endDate": datetime.strptime(input("Date de fin (dd/mm/YYYY): "), "%d/%m/%Y")
 }
 
 productIDs = []

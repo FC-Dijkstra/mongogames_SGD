@@ -45,7 +45,7 @@ hasCommented = db.products.find_one(
     {"comments": 1}
 )
 
-if hasCommented is not None and hasCommented.matched_count > 0:
+if hasCommented is not None:
     print("Erreur, l'utilisateur a déjà commenté sur le produit")
     exit(1)
 
@@ -53,10 +53,30 @@ comment = {
     "buyerID": ObjectId(buyerID),
     "date": datetime.now().isoformat(),
     "message": input("Message: "),
-    "notation": input("Note (sur 5): ")
+    "notation": int(input("Note (sur 5): "))
 }
 
-result = db.products.update_one({"_id": ObjectId(productID)}, {"$set": {"comments": [comment]}})
+# mise a jour de la note du produit
+pipeline = [
+    {"$unwind": "$comments"},
+    {"$group": {
+        "_id": 0,
+        "total": {"$sum": "$comments.notation"},
+        "count": {"$count": {}}
+    }}
+]
+notation = list(db.products.aggregate(pipeline))[0]
+notation["count"] = notation["count"] + 1
+notation["total"] = notation["total"] + comment["notation"]
+productNotation = notation["total"] / notation["count"]
+
+result = db.products.update_one(
+    {"_id": ObjectId(productID)},
+    {
+        "$push": {"comments": comment},
+        "$set": {"notation": productNotation}
+    }
+)
 print("[INFO] Acknowledged: " + str(result.acknowledged))
 print("[INFO] modifiedCount: " + str(result.modified_count))
 
