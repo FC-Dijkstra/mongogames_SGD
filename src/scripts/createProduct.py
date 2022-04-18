@@ -26,6 +26,7 @@ product = {
     "notation": 0,
     "stock": input("Stock (int): "),
     "comments": [],
+    "promotions": [],
     "release": datetime.now().isoformat(),
     "author": input("Auteur (string): "),
     "editor": input("Editeur (string): "),

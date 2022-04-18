@@ -1,7 +1,10 @@
 import datetime
 import json
+import uuid
 
 import pymongo
+from bson.binary import UuidRepresentation
+from bson import ObjectId
 
 configfile = open("../../config.json")
 config = json.load(configfile)
@@ -16,22 +19,29 @@ db = client.SGD
 print("--- Connection OK ---")
 print("--- Créer une promotion ---")
 
+promotion = {
+    "uuid": ObjectId(),
+    "type": input("Type: (FLAT | PERCENT): "),
+    "value": input("Valeur: "),
+    "startDate": input("Date de début: "),
+    "endDate": input("Date de fin: ")
+}
+
 productIDs = []
 stop = False
 while not stop:
-    productID = input("ID du produit: ")
+    productID = input("ID du produit (vide pour arréter) : ")
 
     if productID == "":
         stop = True
     else:
-        productIDs.append(productID)
+        result = db.products.update_one(
+            {"_id": ObjectId(productID)},
+            {"$push": { "promotions": promotion}}
+        )
 
-promotion = {
-    "type": input("Type: (FLAT | PERCENT)"),
-    "value": input("Valeur: "),
-    "startDate": input("Date de début"),
-    "endDate": input("Date de fin")
-}
+        print("[INFO] Acknowledged: " + str(result.acknowledged))
+        print("[INFO] modifiedCount: " + str(result.modified_count))
 
 print("--- Closing connexion ---")
 client.close()

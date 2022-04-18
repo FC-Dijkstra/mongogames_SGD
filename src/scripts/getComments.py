@@ -1,6 +1,8 @@
 import json
+import pprint
 
 import pymongo
+from bson import ObjectId
 
 configfile = open("../../config.json")
 config = json.load(configfile)
@@ -16,7 +18,11 @@ print("--- Connection OK ---")
 print("--- Récupérer les commentaires d'un produit ---")
 
 productID = input("ID d'un produit: ")
-product = db.products.find({"_id"})
+comments = db.products.find_one(
+    {"_id": ObjectId(productID)},
+    {"comments": 1}
+)
+pprint.pprint(comments)
 
 print("--- Closing connexion ---")
 client.close()

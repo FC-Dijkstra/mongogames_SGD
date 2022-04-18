@@ -38,15 +38,14 @@ if hasBought is None:
 
 # Check si l'utilisateur a déjà commenté le produit
 hasCommented = db.products.find_one(
-    {"_id": ObjectId(productID)},
-    {"comments": {
-        "$elemMatch": {
-            "buyerID": ObjectId(buyerID)
-        }
-    }}
+    {
+        "_id": ObjectId(productID),
+        "comments.buyerID": ObjectId(buyerID)
+    },
+    {"comments": 1}
 )
 
-if hasCommented is not None:
+if hasCommented is not None and hasCommented.matched_count > 0:
     print("Erreur, l'utilisateur a déjà commenté sur le produit")
     exit(1)
 
