@@ -27,18 +27,24 @@ pipeline = [
     }}
 ]
 promotion = list(db.products.aggregate(pipeline))[0]
-pprint.pprint(promotion)
 
-modifications = {
-    "type": input("Type: ") or promotion.type,
-    "value": input("Valeur: ") or promotion.valeur,
-    "startDate": input("Date de debut: ") or promotion.startDate,
-    "endDate": input("Date de fin: ") or promotion.endDate
-}
+type = input("Type: ") or promotion.type
+value = input("Valeur: ") or promotion.valeur
+startDate = input("Date de debut: ") or promotion.startDate
+endDate = input("Date de fin: ") or promotion.endDate
 
-db.products.update_many(
-    {""}
+result = db.products.update_many(
+    {"promotions.uuid": ObjectId(promotionID)},
+    {"$set": {
+        "promotions.$.type": type,
+        "promotions.$.value": value,
+        "promotions.$.startDate": startDate,
+        "promotions.$.endDate": endDate
+    }}
 )
+
+print("[INFO] Acknowledged: " + str(result.acknowledged))
+print("[INFO] modifiedCount: " + str(result.modified_count))
 
 print("--- Closing connexion ---")
 client.close()

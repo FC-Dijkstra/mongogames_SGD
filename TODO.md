@@ -27,11 +27,14 @@ Imbrication:
 * ajouter un commentaire à un produit
 * récupérer tous les produits en promotion
 * récupérer tous les commentaires d'un produit
+  * FAIT Yann
 * appliquer les promotions automatiquement au prix (faire un lien promotion -> product)
 * incrémentation des vues automatique.
 * ajouter un produit à une wishlist
 * mettre a jour la note d'un produit à l'ajout d'un commentaire
+  * TODO Yann
 * purger toutes les promotions a expiration
+  * TODO Yann
 
 ## Fonctionnalités avancées
 
