@@ -18,8 +18,22 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
+d = input("day (dd): ")
+m = input("month (mm): ")
+y = input("year (YYYY) : ")
+choice = input("greater than -> gte,\n lesser than -> lte,\n equals -> eq :\n ")
+date = d+"/"+m+"/"+y
+choice = "$"+choice
 
-result = db.orders.aggregate([{"$unwind" : "$order"},{"$group": {"_id" : "$order.idProduct","total" : {"$sum" : "$order.quantity"}}},{"$sort" : {"date" : -1}}])
+print("date : ", choice, " : ", date)
+
+try:
+    result = db.orders.aggregate([{"$match": {"date" : {choice: date}}},{"$unwind" : "$order"},{"$group": {"_id" : {"idProduct": "$order.idProduct"},
+                                                                            "total": {"$sum": "$order.quantity"}}},
+                              {"$project": {"_id": 1, "total" : 1, "date": 1}}, {"$sort" : {"date" : -1}}])
+except Exception as e :
+    print("Error !! : ", e)
+
 for r in result:
     pprint(r)
 print("--- Closing connexion ---")
