@@ -37,7 +37,7 @@ if choice != "$eq" :
 else :
     date = date.replace(date.year,date.month,date.day,0,0,0,0)
     datef = date.replace(date.year,date.month,date.day+1,0,0,0,0)
-    result = db.orders.aggregate([{"$match": {"date" : {"$gte": date, "lt": datef}}},{"$unwind" : "$order"},{"$group": {"_id" :"$order.idProduct",
+    result = db.orders.aggregate([{"$match": {"date" : {"$gte": date, "$lt": datef}}},{"$unwind" : "$order"},{"$group": {"_id" :"$order.idProduct",
                                                                             "total": {"$sum": "$order.quantity"}}},
                               {"$project": {"_id": 1, "total" : 1, "date": 1}}, {"$sort" : {"date" : -1}}])
 
