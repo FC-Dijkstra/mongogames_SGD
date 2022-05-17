@@ -16,30 +16,25 @@ Imbrication:
 * CRUD produit
   > * FAIT Yann
 * CRUD promotion
-<<<<<<< HEAD
   * FAIT Yann
 * CRUD purchase
   * FAIT matthieu
-=======
   > * TODO Yann
 * CRUD purchase
   > * FAIT Matthieu
->>>>>>> main
+
 * CRUD buyer
   > * FAIT Matthieu
 * CRUD comment
-<<<<<<< HEAD
   * FAIT Yann
 * acheter un produit -> C purchase
 * ajouter un commentaire à un produit -> C comment
-=======
   > * TODO Yann
 
 
 * commentaires pour un produit
 * acheter un produit
 * ajouter un commentaire à un produit
->>>>>>> main
 * récupérer tous les produits en promotion
   * FAIT Yann
 * récupérer tous les commentaires d'un produit
@@ -57,11 +52,9 @@ Imbrication:
 
 * évolution des ventes (+ CA) au cours du temps pour un produit
 * impact des promotions sur les ventes
-<<<<<<< Updated upstream
-=======
 * statistiques globales journalière ou depuis une date d'un produit
   > * FAIT Matthieu
-* statistiques globales journalières (n - 1) (échelle site) 
->>>>>>> Stashed changes
+* statistiques globales journalières (n - 1) (échelle site)
 * statistiques globales journalières (n - 1) (échelle éditeur / auteur)
 * évolution de l'avis des utilisateurs sur un produit
+-> utiliser matplotlib pour pouvoir sortir des graphiques/ 

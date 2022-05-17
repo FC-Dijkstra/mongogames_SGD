@@ -15,7 +15,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("Supprimer un buyer")
+print("--- Supprimer un acheteur ---")
 
 buyerID = input("ID buyer: ")
 result = db.buyers.delete_one({"_id": ObjectId(buyerID)})

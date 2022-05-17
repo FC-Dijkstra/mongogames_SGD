@@ -14,7 +14,7 @@ mongostring = f"mongodb+srv://{config['user']}:{config['password']}@{config['hos
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("--- Voir le prix actuel d'un élément ---")
+print("--- Voir le prix actuel d'un élément (promotions appliquées) ---")
 
 productID = input("ID du produit: ")
 product = db.products.find_one({"_id": ObjectId(productID)})

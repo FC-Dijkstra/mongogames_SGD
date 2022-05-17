@@ -1,15 +1,13 @@
 {
-    "purchase": {
-        "_id": 1,
-        "order": [
-            1,
-            2,
-            3,
-            4,
-            5
-        ],
-        "buyer": 1,
-        "totalAmount": 120.0,
-        "date": "04/04/2021"
-    }
+    "_id": ObjectID("625d85e20330de5febc54ad0"),
+    "order": [
+        {
+            "idProduct": "1",
+            "quantity": 1,
+            "subtotal": 100.0
+        }
+    ],
+    "buyerID": ObjectID("625c18d40ad854de821d0401"),
+    "date": "2022-04-18T17:38:10.216+00:00",
+    "totalAmount": 100.0
 }

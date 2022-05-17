@@ -1,9 +1,7 @@
 {
-    "comment": {
-        "_id": 1,
-        "buyer": 1,
-        "date": "07/02/2021",
-        "message": "abc123",
-        "notation": 4.0
-    }
+    "_id": 1,
+    "buyer": 1,
+    "date": "07/02/2021",
+    "message": "abc123",
+    "notation": 4.0
 }

@@ -15,7 +15,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("Supprimer un produit")
+print("--- Supprimer un produit ---")
 
 productID = input("ID Produit: ")
 result = db.products.delete_one({"_id": ObjectId(productID)})

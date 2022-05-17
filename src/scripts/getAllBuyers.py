@@ -19,7 +19,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("--- find all buyers ---")
+print("--- Lister tous les acheteurs ---")
 buyers = db.buyers.find()
 for buyer in buyers:
         pprint(buyer)

@@ -17,7 +17,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-
+print("--- Créer un acheteur ---")
 buyer = {
         "name": input("name (string): "),
         "fstName": input("first name (string): "),

@@ -18,6 +18,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
+print("--- Ajouter un produit dans une wishlist ---")
 
 buyerID = input("ID Buyer: ")
 updated_buyer = db.buyers.find_one({"_id": ObjectId(buyerID)})

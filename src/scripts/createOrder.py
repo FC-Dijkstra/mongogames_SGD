@@ -18,6 +18,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
+print("--- Créer un order ---")
 
 item_ordered = []
 iteration = "null"

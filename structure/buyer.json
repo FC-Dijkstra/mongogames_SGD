@@ -1,16 +1,10 @@
 {
-    "buyer": {
-        "_id": 1,
-        "name": "abc123",
-        "fstName": "abc123",
-        "nickname": "abc123",
-        "password": "abc123",
-        "wishlist": [
-            1,
-            2,
-            3,
-            4,
-            5
-        ]
-    }
+    "_id": ObjectID("625c18d40ad854de821d0401"),
+    "name": "Yann",
+    "fstName": "Trou",
+    "nickname": "IanZer",
+    "password": "abc123",
+    "wishlist": [
+        ObjectID("1")
+    ]
 }

@@ -1,31 +1,39 @@
 {
-    "produit": {
-        "_id": "1",
-        "name": "abc123",
-        "description": "abc123",
-        "price": 0.0,
-        "category": "abc123",
-        "sales": 0,
-        "release": "01/01/2020",
-        "notation": 0.0,
-        "stock": 1,
-        "comments": [
-            1,
-            2,
-            3,
-            4,
-            5
-        ],
-        "seller": "ID",
-        "author": "abc123",
-        "editor": "abc123",
-        "minPlayers": 1,
-        "maxPlayers": 4,
-        "duration": 30,
-        "recommendedAge": 14,
-        "expeditionTime": 24,
-        "complexity": 2.0,
-        "concentration": 3.0,
-        "ambience": 4.0
-    }
+    "_id": "1",
+    "name": "produit de test",
+    "description": "un produit de test, rien de plus",
+    "price": 100.0,
+    "category": "test",
+    "sales": 1,
+    "release": "01/01/2020",
+    "notation": 0.0,
+    "stock": 99,
+    "promotions": [
+        {
+            "uuid": ObjectID("625d7c32720c8eab3cc6b589")
+            "type": "FLAT",
+            "value": 10,
+            "startDate": "2021-01-01T00:00:00.000+00:00",
+            "endDate": "2022-10-01T00:00:00.000+00:00"
+        }
+    ],
+    "comments": [
+        {
+            "buyerID": ObjectID("625c18d40ad854de821d0401"),
+            "date": "2022-04-18T16:22:48.86769",
+            "message": "Commentaire de test",
+            "notation": 4.5
+        }
+    ],
+    "seller": "IAN",
+    "author": "IAN",
+    "editor": "IAN",
+    "minPlayers": 1,
+    "maxPlayers": 4,
+    "duration": 30,
+    "recommendedAge": 14,
+    "expeditionTime": 24,
+    "complexity": 2.0,
+    "concentration": 3.0,
+    "ambience": 4.0
 }

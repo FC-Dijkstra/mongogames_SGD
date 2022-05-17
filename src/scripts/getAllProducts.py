@@ -14,8 +14,8 @@ mongostring = f"mongodb+srv://{config['user']}:{config['password']}@{config['hos
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
+print("--- Lister tous les produits ---")
 
-print("lister tous les packages")
 products = db.products.find()
 for product in products:
     pprint.pprint(product)

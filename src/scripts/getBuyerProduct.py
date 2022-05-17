@@ -18,9 +18,8 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
+print("--- Lister les achats d'un acheteur ---")
 buyer = input("id_buyer : ")
-
-
 try:
     result = db.orders.find({"buyerID": ObjectId(buyer)})
 except Exception as e :

@@ -17,7 +17,7 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-print("---update buyer---")
+print("--- Modifier les informations d'un acheteur---")
 
 buyerID = input("ID Buyer: ")
 updated_buyer = db.buyers.find_one({"_id": ObjectId(buyerID)})

@@ -10,6 +10,7 @@ configfile = open("../../config.json")
 config = json.load(configfile)
 configfile.close()
 print("--- Loaded config ---")
+print("--- Statistiques de vente ---")
 
 # ? configuration et connexion mongoDB
 # mongodb://user:pwd@host/db?authSource=db
@@ -31,15 +32,34 @@ result = None
 print("date : ", choice, " : ")
 
 if choice != "$eq" :
-    result = db.orders.aggregate([{"$match": {"date": {choice: date}}},{"$unwind" : "$order"},{"$group": {"_id" :"$order.idProduct",
-                                                                            "total": {"$sum": "$order.quantity"}}},
-                              {"$project": {"_id": 1, "total": 1, "date": 1}}, {"$sort" : {"date" : -1}}])
+    result = db.orders.aggregate([
+        {"$match": {"date": {choice: date}}},
+        {"$unwind" : "$order"},
+        {"$group": {
+            "_id" :"$order.idProduct",
+            "total": {
+                "$sum": "$order.quantity"}
+        }},
+        {"$project": {
+            "_id": 1,
+            "total": 1,
+            "date": 1}
+        },
+        {"$sort" : {"date" : -1}}])
 else :
     date = date.replace(date.year,date.month,date.day,0,0,0,0)
     datef = date.replace(date.year,date.month,date.day+1,0,0,0,0)
-    result = db.orders.aggregate([{"$match": {"date" : {"$gte": date, "$lt": datef}}},{"$unwind" : "$order"},{"$group": {"_id" :"$order.idProduct",
-                                                                            "total": {"$sum": "$order.quantity"}}},
-                              {"$project": {"_id": 1, "total" : 1, "date": 1}}, {"$sort" : {"date" : -1}}])
+    result = db.orders.aggregate([
+        {"$match": {"date" : {"$gte": date, "$lt": datef}}},
+        {"$unwind" : "$order"},
+        {"$group": {
+            "_id" :"$order.idProduct",
+            "total": {
+                "$sum": "$order.quantity"
+            }
+        }},
+        {"$project": {"_id": 1, "total" : 1, "date": 1}},
+        {"$sort" : {"date" : -1}}])
 
 for r in result:
     product = db.products.find_one({"_id": r["_id"]})
