@@ -56,7 +56,7 @@ order = {
         "order": item_ordered,
         "buyerID": ObjectId(input("ID (string): ")),
         "date": datetime.now(),
-        "totalAmount": totalamount,
+        "totalAmount": float(totalamount),
     }
 
 result = db.orders.insert_one(order)

@@ -21,23 +21,23 @@ print("--- Créer un produit ---")
 product = {
     "name": input("Nom (string):"),
     "description": input("Description (string): "),
-    "price": input("Prix (float): "),
+    "price": float(input("Prix (float): ")),
     "sales": 0,
     "notation": 0,
-    "stock": input("Stock (int): "),
+    "stock": int(input("Stock (int): ")),
     "comments": [],
     "promotions": [],
     "release": datetime.now().isoformat(),
     "author": input("Auteur (string): "),
     "editor": input("Editeur (string): "),
-    "minPlayers": input("Nombre minimum de joueurs (int): "),
-    "maxPlayers": input("Nombre maximum de joueurs (int): "),
-    "duration": input("Durée (int): "),
-    "recommendedAge": input("Age recommandé (int): "),
-    "expeditionTime": input("Délai d'envoi (int): "),
-    "complexity": input("Complexité (float) [0;10]: "),
-    "concentration": input("Concentration (float) [0; 10]: "),
-    "ambience": input("Ambience (float) [0; 10]: ")
+    "minPlayers": int(input("Nombre minimum de joueurs (int): ")),
+    "maxPlayers": int(input("Nombre maximum de joueurs (int): ")),
+    "duration": int(input("Durée (int): ")),
+    "recommendedAge": int(input("Age recommandé (int): ")),
+    "expeditionTime": int(input("Délai d'envoi (int): ")),
+    "complexity": float(input("Complexité (float) [0;10]: ")),
+    "concentration": float(input("Concentration (float) [0; 10]: ")),
+    "ambience": float(input("Ambience (float) [0; 10]: "))
 }
 
 result = db.products.insert_one(product)
