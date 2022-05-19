@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 import pymongo
 
-configfile = open("../../config.json")
+configfile = open("../config.json")
 config = json.load(configfile)
 configfile.close()
 print("--- Loaded config ---")
@@ -46,9 +46,13 @@ for i in range(0, 31):
     if nbCommentaires[i] != 0:
         notes[i] = (notes[i] / nbCommentaires[i])
 
-plt.plot(notes)
+#https://matplotlib.org/3.5.0/gallery/subplots_axes_and_figures/two_scales.html
+
+plt.bar(range(0, 31), notes, color="r", label="note moyenne")
+plt.plot(nbCommentaires, color="g", label="Nombre de commentaires")
 plt.ylabel("Notation")
 plt.xlabel("Jour")
+plt.legend()
 plt.show()
 
 print("--- Closing connexion ---")
