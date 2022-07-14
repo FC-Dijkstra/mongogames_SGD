@@ -65,7 +65,13 @@ pipeline = [
         "count": {"$count": {}}
     }}
 ]
-notation = list(db.products.aggregate(pipeline))[0]
+
+notation = list(db.products.aggregate(pipeline))
+if len(notation) == 0 :
+    notation = {
+        "count": 0,
+        "total": 0,
+    }
 notation["count"] = notation["count"] + 1
 notation["total"] = notation["total"] + comment["notation"]
 productNotation = notation["total"] / notation["count"]

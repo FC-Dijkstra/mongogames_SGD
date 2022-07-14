@@ -20,10 +20,10 @@ print(mongostring)
 client = pymongo.MongoClient(mongostring)
 db = client.SGD
 print("--- Connection OK ---")
-d = input("day (dd): ")
-m = input("month (mm): ")
-y = input("year (YYYY) : ")
-choice = input("greater than -> gte,\n lesser than -> lte,\n equals -> eq :\n ")
+d = input("jour (dd): ")
+m = input("mois (mm): ")
+y = input("année (YYYY) : ")
+choice = input("après -> gte,\n avant -> lte,\n jour même -> eq :\n ")
 date = datetime.now()
 date = date.replace(int(y), int(m), int(d), 0, 0, 0, 0)
 print(date)
@@ -31,6 +31,7 @@ choice = "$"+choice
 result = None
 print("date : ", choice, " : ")
 
+#si on veut une date avant / après
 if choice != "$eq" :
     result = db.orders.aggregate([
         {"$match": {"date": {choice: date}}},
@@ -46,6 +47,7 @@ if choice != "$eq" :
             "date": 1}
         },
         {"$sort" : {"date" : -1}}])
+#si on veut une date le jour même
 else :
     date = date.replace(date.year,date.month,date.day,0,0,0,0)
     datef = date.replace(date.year,date.month,date.day+1,0,0,0,0)

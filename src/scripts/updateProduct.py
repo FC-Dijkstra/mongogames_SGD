@@ -24,18 +24,18 @@ print("Laisser vide pour conserver la valeur précédente")
 
 name = input("Nom: ") or product["name"]
 description = input("Description: ") or product["description"]
-price = input("Prix: ") or product["price"]
-stock = input("Stock: ") or product["stock"]
+price = float(input("Prix: ")) or product["price"]
+stock = int(input("Stock: ")) or product["stock"]
 author = input("Auteur: ") or product["author"]
 editor = input("Editeur: ") or product["editor"]
-minPlayers = input("Nombre min. de joueurs: ") or product["minPlayers"]
-maxPlayers = input("Nombre max. de joueurs: ") or product["maxPlayers"]
-duration = input("Durée: ") or product["duration"]
-recommendedAge = input("Age recommandé: ") or product["recommendedAge"]
-expeditionTime = input("Délai d'envoi: ") or product["expeditionTime"]
-complexity = input("Complexité: ") or product["complexity"]
-concentration = input("Concentration: ") or product["concentration"]
-ambience = input("Ambiance: ") or product["ambience"]
+minPlayers = int(input("Nombre min. de joueurs: ")) or product["minPlayers"]
+maxPlayers = int(input("Nombre max. de joueurs: ")) or product["maxPlayers"]
+duration = int(input("Durée: ")) or product["duration"]
+recommendedAge = int(input("Age recommandé: ")) or product["recommendedAge"]
+expeditionTime = int(input("Délai d'envoi: ")) or product["expeditionTime"]
+complexity = float(input("Complexité: ")) or product["complexity"]
+concentration = float(input("Concentration: ")) or product["concentration"]
+ambience = float(input("Ambiance: ")) or product["ambience"]
 
 modifications = {
     "name": name,

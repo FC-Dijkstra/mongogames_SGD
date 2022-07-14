@@ -33,7 +33,7 @@ if comment is None:
     exit(1)
 
 message = input("Message: ") or comment["message"]
-notation = input("Note: ") or comment["notation"]
+notation = int(input("Note: ")) or comment["notation"]
 
 result = db.products.update_one(
     {

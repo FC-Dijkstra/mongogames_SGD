@@ -29,7 +29,7 @@ pipeline = [
 promotion = list(db.products.aggregate(pipeline))[0]
 
 type = input("Type: ") or promotion.type
-value = input("Valeur: ") or promotion.valeur
+value = int(input("Valeur: ")) or promotion.valeur
 startDate = input("Date de debut: ") or promotion.startDate
 endDate = input("Date de fin: ") or promotion.endDate
 

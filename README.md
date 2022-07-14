@@ -43,3 +43,12 @@ Instructions *find*, *agregate* et une requête expliquée en *MapReduce*
 ## 3e partie: Python et pyMongo
 
 requêtes complémentaires plus complexes sur les jeux et les commentaires à des fins d'analyse décisionnelle.
+
+## Pour lancer le projet
+
+La version de python nécessaire est la version 3.9
+Il doit y avoir les bibliothèques suivantes d'installées:
+
+* matplotlib
+* pymongo\[srv\]
+* tkinter (normalement fourni avec python)

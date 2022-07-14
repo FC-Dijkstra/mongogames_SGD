@@ -23,7 +23,7 @@ print("--- Créer une promotion ---")
 promotion = {
     "uuid": ObjectId(),
     "type": input("Type: (FLAT | PERCENT): "),
-    "value": input("Valeur: "),
+    "value": int(input("Valeur: ")),
     "startDate": datetime.strptime(input("Date de début (dd/mm/YYYY): "), "%d/%m/%Y"),
     "endDate": datetime.strptime(input("Date de fin (dd/mm/YYYY): "), "%d/%m/%Y")
 }
